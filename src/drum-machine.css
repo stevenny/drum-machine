@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Francois+One");
+* {
+  font-family: "Francois One", sans-serif;
+  text-align: center;
+}
+
+#drum-machine {
+  border: 1px solid black;
+}
+
+.drum-pad {
+  border: 1px solid black;
+  width: 100%;
+}
+
+/*# sourceMappingURL=drum-machine.css.map */
