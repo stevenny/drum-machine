@@ -10,7 +10,7 @@ const bank = [{
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3',
 }, {
     keyTrigger: 'W',
-    keycode: 87,
+    keyCode: 87,
     id: 'heater-2',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'
 }, {
@@ -54,22 +54,28 @@ const bank = [{
 class DrumMachine extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            currentBank: bank
+        }
     }
+    
     render() {
-        return (
-            <Grid fluid>
-                <div id="drum-machine">
-                <h1>Drum Machine</h1>
-                    <Row id="display"> 
-                        <Col md={12}>
-                            <h2>Display</h2>
-                        </Col>
-                    </Row>
+            return (
+                <Grid fluid>
+                    <div id="drum-machine">
+                    <h1>Drum Machine</h1>
+                        <Row id="display"> 
+                            <Col md={12}>
+                                <h2>Display </h2>
+                            </Col>
+                        </Row>
+                        <DrumPad>
+                           
 
-                    <DrumPad></DrumPad>
-                </div>
-            </Grid>          
-        )
+                        </DrumPad>
+                    </div>
+                </Grid>          
+            )
     }
 }
 
@@ -77,37 +83,60 @@ class DrumPad extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentBank: bank,
-            newBank: {
-
-            }
+            currentBank: bank
         }
     }
-
-    playSound(e) {
-        const keyPress = e.target;
-        console.log(keyPress);
-    }
     
-   //still figuring this garbage out
     render() {
-        let newArr = this.state.currentBank.map((something, i, somethingArr) => {
+        let newArr = this.state.currentBank.map((k, i, padArr) => {
             return (
-                <div className="drum-pad"  onClick={this.playSound} key={somethingArr[i].id} id={somethingArr[i].id}>
-                    {somethingArr[i].keyTrigger}<audio ></audio>
-                </div>       
-                )                 
-        });
-        return ( 
-            <div >
+                <Pad 
+                    id={padArr[i].id} 
+                    url={padArr[i].url} 
+                    keyTrigger={padArr[i].keyTrigger} 
+                    keyCode={padArr[i].keyCode}
+                    key={padArr[i].id}
+                    
+                ></Pad>
+            )
+        })
+
+        return (
+            <div>
                 {newArr}
             </div>
-            
+        )
+    }  
+}
+
+class Pad extends Component {
+    constructor(props) {
+        super(props);
+        this.playSound = this.playSound.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+
+    }
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyPress)
+    } 
+    handleKeyPress(e) {
+        if (e.keyCode === this.props.keyCode) {
+            this.playSound();
+        }
+    } 
+
+    
+    playSound(e) {
+        const sound = document.getElementById(this.props.keyTrigger)
+        sound.play();
+    }
+    render() {
+        return(
+            <div className="drum-pad" onClick={this.playSound} className="drum-pad">{this.props.keyTrigger}<audio src={this.props.url} className="clip" id={this.props.keyTrigger}></audio></div>
         )
     }
 }
-    
 
 
-
+ 
 export default DrumMachine;
