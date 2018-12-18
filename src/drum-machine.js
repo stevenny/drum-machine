@@ -53,86 +53,79 @@ const bank = [{
 
 class DrumMachine extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            currentBank: bank
-        }
-    }
-    
-    render() {
-            return (
-                <Grid fluid>
-                    <div id="drum-machine">
-                    <h1>Drum Machine</h1>
-                        <Row id="display"> 
-                            <Col md={12}>
-                                <h2>Display </h2>
-                            </Col>
-                        </Row>
-                        <DrumPad>
-                           
+       super(props)
+       this.state = {
+           display: "",
+           currentBank: bank      
+       }
 
-                        </DrumPad>
-                    </div>
-                </Grid>          
+       this.updateDisplay = this.updateDisplay.bind(this)
+    }
+    updateDisplay(name) {
+        this.setState({
+            display: name
+        })
+    }
+   
+    render() {
+        let newArr = this.state.currentBank.map((j, i, padArr) => {
+            return (
+                <DrumPad
+                    id={padArr[i].id}
+                    keyTrigger={padArr[i].keyTrigger}
+                    keyCode={padArr[i].keyCode}
+                    url={padArr[i].url}
+                    key={padArr[i].id}
+                    updateDisplay={this.updateDisplay}
+                ></DrumPad>
             )
+        });
+
+        return (
+            <div class="container" id="drum-machine">
+                <h1>Drum Machine</h1>
+                <div>
+                    <p id="display">{this.state.display}</p>
+                </div>
+                <div id="inner">
+                    {newArr}
+
+                </div>
+            </div>
+        )  
     }
 }
 
 class DrumPad extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            currentBank: bank
-        }
-    }
-    
-    render() {
-        let newArr = this.state.currentBank.map((k, i, padArr) => {
-            return (
-                <Pad 
-                    id={padArr[i].id} 
-                    url={padArr[i].url} 
-                    keyTrigger={padArr[i].keyTrigger} 
-                    keyCode={padArr[i].keyCode}
-                    key={padArr[i].id}
-                    
-                ></Pad>
-            )
-        })
-
-        return (
-            <div>
-                {newArr}
-            </div>
-        )
-    }  
-}
-
-class Pad extends Component {
-    constructor(props) {
-        super(props);
-        this.playSound = this.playSound.bind(this);
+        super(props)
+        this.playAudio = this.playAudio.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
-
     }
+
     componentDidMount() {
-        document.addEventListener('keydown', this.handleKeyPress)
-    } 
-    handleKeyPress(e) {
-        if (e.keyCode === this.props.keyCode) {
-            this.playSound();
-        }
-    } 
-
-    
-    playSound(e) {
-        const sound = document.getElementById(this.props.keyTrigger)
-        sound.play();
+        document.addEventListener("keydown", this.handleKeyPress)
     }
+
+    handleKeyPress(e) {
+        if(e.keyCode === this.props.keyCode) {
+            this.playAudio();
+
+        }
+    }
+
+    playAudio(e) {
+        const sound = document.getElementById(this.props.keyTrigger);
+        sound.play();
+        this.props.updateDisplay(this.props.id)
+    }
+
     render() {
-        return(
-            <div className="drum-pad" onClick={this.playSound} className="drum-pad">{this.props.keyTrigger}<audio src={this.props.url} className="clip" id={this.props.keyTrigger}></audio></div>
+        return (
+            <div onClick={this.playAudio} id={this.props.id} className="drum-pad">
+                {this.props.keyTrigger}
+                <audio id={this.props.keyTrigger} src={this.props.url}></audio>
+            </div>
         )
     }
 }

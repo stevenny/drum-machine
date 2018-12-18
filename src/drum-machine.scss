@@ -1,34 +1,62 @@
 @import url('https://fonts.googleapis.com/css?family=Francois+One');
+$primary: #665e7a;
+$border-radius: 5px;
+$border: 1px solid black;
+
+body {
+    background-color: $primary;
+    #drum-machine {
+        border: $border;
+        border-radius: $border-radius;
+    }   
+    .container {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 0;
+
+        #inner {
+            border: $border;
+            border-radius: $border-radius;
+            margin: 0 10px 10px 10px;
+        }
+
+
+        
+        
+        .drum-pad {
+            border: $border;
+            margin: 10px 20px 10px 10px;
+            height: 50px;
+            width: 25%;
+            box-sizing: border-box;
+            display: inline-block;
+            padding-top: 12px;
+            cursor: pointer;
+            border-radius: $border-radius;
+            box-shadow: 1px 1px 5px;
+            background-color: #EFEFE4;
+            color: #665E7A;
+            
+        }
+    
+        #display {
+            vertical-align: middle;
+            height: 50px; 
+            width: 200px;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+       
+
+    }
+    
+
+}
 
 * {
     font-family: 'Francois One', sans-serif;
-    text-align: center;
-    
-    #drum-machine {
-        border: 1px solid black;
-    }
-    
-    .drum-pad {
-        border: 1px solid black;
-        margin: 10px 20px 10px 10px;
-        height: 50px;
-        width: 25%;
-        box-sizing: border-box;
-        display: inline-block;
-        padding-top: 12px;
-    }
-
-    #display {
-        border: 1px solid black;
-        margin:  0 2em 2em 2em;
-    }
-
-    
-
-   
- 
-
-   
+    text-align: center; 
 }
 
 
