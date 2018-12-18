@@ -25,7 +25,6 @@ body {
             width: 25%;
             box-sizing: border-box;
             display: inline-block;
-            padding-top: 12px;
             cursor: pointer;
             border-radius: $border-radius;
             box-shadow: 1px 1px 5px;
@@ -56,6 +55,7 @@ body {
                 font-size: 25px;
                 height: 50px;
                 width: 75px;
+                font-size: 15px;
             }
 
         }

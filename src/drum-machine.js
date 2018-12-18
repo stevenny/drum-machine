@@ -16,7 +16,7 @@ const bank = [{
     keyTrigger: 'E',
     keyCode: 69,
     id: 'heater-3',
-    url: '‘https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3', 
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3', 
 }, {
     keyTrigger: 'A',
     keyCode: 65,
@@ -122,7 +122,7 @@ class DrumPad extends Component {
     render() {
         return (
             <div onClick={this.playAudio} id={this.props.id} className="drum-pad">
-                {this.props.keyTrigger}
+                <p>{this.props.keyTrigger}</p>
                 <audio id={this.props.keyTrigger} src={this.props.url}></audio>
             </div>
         )
