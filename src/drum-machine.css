@@ -1,15 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Francois+One");
 body {
-  background-color: #665e7a;
+  background-color: white;
 }
 body #drum-machine {
   border: 1px solid black;
   border-radius: 5px;
-}
-body .container {
-  margin-left: 15px;
-  margin-right: 15px;
-  padding: 0;
 }
 body .container #inner {
   border: 1px solid black;
@@ -17,9 +12,10 @@ body .container #inner {
   margin: 0 10px 10px 10px;
 }
 body .container .drum-pad {
+  font-size: 45px;
   border: 1px solid black;
   margin: 10px 20px 10px 10px;
-  height: 50px;
+  height: 150px;
   width: 25%;
   box-sizing: border-box;
   display: inline-block;
@@ -41,6 +37,14 @@ body .container #display {
 * {
   font-family: "Francois One", sans-serif;
   text-align: center;
+}
+
+@media only screen and (max-width: 640px) {
+  body .container .drum-pad {
+    font-size: 25px;
+    height: 50px;
+    width: 75px;
+  }
 }
 
 /*# sourceMappingURL=drum-machine.css.map */

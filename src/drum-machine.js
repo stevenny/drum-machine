@@ -1,4 +1,3 @@
-import {Grid, Row, Col} from 'react-flexbox-grid';
 import React, { Component } from 'react';
 import './drum-machine.css';
 
@@ -82,7 +81,7 @@ class DrumMachine extends Component {
         });
 
         return (
-            <div class="container" id="drum-machine">
+            <div className="container" id="drum-machine">
                 <h1>Drum Machine</h1>
                 <div>
                     <p id="display">{this.state.display}</p>
@@ -129,7 +128,4 @@ class DrumPad extends Component {
         )
     }
 }
-
-
- 
 export default DrumMachine;
