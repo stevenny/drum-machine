@@ -1,23 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Francois+One');
-$primary:white;
 $border-radius: 5px;
 $border: 1px solid black;
 
 body {
-    background-color: $primary;
+    background-color: #8BB2C9;
+    h1, p {
+        color: #3C618B;
+    }
+
     #drum-machine {
-        border: $border;
         border-radius: $border-radius;
     }   
     .container {
 
         #inner {
-            border: $border;
+            background-color: #8BB2C9;
             border-radius: $border-radius;
             margin: 0 10px 10px 10px;
+            
         }
 
         .drum-pad {
+            background-color: #4D75A3;
             font-size: 45px;
             border: $border;
             margin: 10px 20px 10px 10px;
@@ -28,8 +32,9 @@ body {
             cursor: pointer;
             border-radius: $border-radius;
             box-shadow: 1px 1px 5px;
-            background-color: #EFEFE4;
-            color: #665E7A;     
+            P {
+                color: #F7F5F6;
+            }
         }
     
         #display {
