@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './drum-machine.css';
 
-//need to add keyCode attr
 const bank = [{
     keyTrigger: 'Q',
     keyCode: 81,
@@ -47,22 +46,39 @@ const bank = [{
     keyCode: 67,
     id: 'cev-h2',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
-}
-]
+}]
 
 class DrumMachine extends Component {
     constructor(props) {
        super(props)
        this.state = {
            display: "",
-           currentBank: bank      
+           currentBank: bank,    
+           volume: 50,
+           power: true,
+           powerOn: "On"
        }
-
-       this.updateDisplay = this.updateDisplay.bind(this)
-    }
+       this.updateDisplay = this.updateDisplay.bind(this);
+       this.updateVolume = this.updateVolume.bind(this);
+       this.updatePower = this.updatePower.bind(this);
+       }
+       
     updateDisplay(name) {
         this.setState({
             display: name
+        })
+    }
+
+    updateVolume(vol) {
+        this.setState({
+            volume: vol.target.value
+        })
+    }
+
+    updatePower() {
+        this.setState({
+            power: this.state.power ? false : true,
+            powerOn: this.state.power ? "Off" : "On"
         })
     }
    
@@ -76,6 +92,8 @@ class DrumMachine extends Component {
                     url={padArr[i].url}
                     key={padArr[i].id}
                     updateDisplay={this.updateDisplay}
+                    power={this.state.power}
+                    volume={this.state.volume}
                 ></DrumPad>
             )
         });
@@ -85,10 +103,19 @@ class DrumMachine extends Component {
                 <h1>Drum Machine</h1>
                 <div>
                     <p id="display">{this.state.display}</p>
+                    <div className="inline">
+                        <p >Volume: </p>
+                        <input type="range" min="1" max="100" value={this.state.volume} onChange={this.updateVolume}  />
+                        <p>{this.state.volume}</p>
+                    </div>
+                    <div className="inline">
+                        <p>Power: </p>
+                        <div onClick={this.updatePower} id="powerButton"></div>
+                        <p>{this.state.powerOn}</p>
+                    </div>
                 </div>
                 <div id="inner">
                     {newArr}
-
                 </div>
             </div>
         )  
@@ -109,14 +136,17 @@ class DrumPad extends Component {
     handleKeyPress(e) {
         if(e.keyCode === this.props.keyCode) {
             this.playAudio();
-
         }
     }
 
-    playAudio(e) {
+    playAudio() {
         const sound = document.getElementById(this.props.keyTrigger);
-        sound.play();
-        this.props.updateDisplay(this.props.id)
+        if(this.props.power) {
+            let newVol = this.props.volume / 100;
+            sound.volume = newVol;
+            sound.play();
+            this.props.updateDisplay(this.props.id)
+        }    
     }
 
     render() {

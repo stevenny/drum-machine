@@ -12,6 +12,17 @@ body {
         border-radius: $border-radius;
     }   
     .container {
+        .inline {
+            display: inline-block;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        #powerButton {
+            border: $border;
+            height: 20px;
+        }
+
 
         #inner {
             background-color: #8BB2C9;

@@ -8,6 +8,15 @@ body h1, body p {
 body #drum-machine {
   border-radius: 5px;
 }
+body .container .inline {
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+body .container #powerButton {
+  border: 1px solid black;
+  height: 20px;
+}
 body .container #inner {
   background-color: #8BB2C9;
   border-radius: 5px;
