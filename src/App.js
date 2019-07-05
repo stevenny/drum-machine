@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './style/App.css';
 import DrumMachine from './drum-machine';
 
 class App extends Component {

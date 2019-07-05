@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './drum-machine.css';
+import './style/drum-machine.css';
+
 
 const bank = [{
     keyTrigger: 'Q',
@@ -15,7 +16,7 @@ const bank = [{
     keyTrigger: 'E',
     keyCode: 69,
     id: 'heater-3',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3', 
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3',
 }, {
     keyTrigger: 'A',
     keyCode: 65,
@@ -50,19 +51,21 @@ const bank = [{
 
 class DrumMachine extends Component {
     constructor(props) {
-       super(props)
-       this.state = {
-           display: "",
-           currentBank: bank,    
-           volume: 50,
-           power: true,
-           powerOn: "On"
-       }
-       this.updateDisplay = this.updateDisplay.bind(this);
-       this.updateVolume = this.updateVolume.bind(this);
-       this.updatePower = this.updatePower.bind(this);
-       }
-       
+        super(props)
+        this.state = {
+            display: "",
+            currentBank: bank,
+            volume: 50,
+            power: true,
+            powerOn: "On",
+            powerCol: "#91a6d0"
+
+        }
+        this.updateDisplay = this.updateDisplay.bind(this);
+        this.updateVolume = this.updateVolume.bind(this);
+        this.updatePower = this.updatePower.bind(this);
+    }
+
     updateDisplay(name) {
         this.setState({
             display: name
@@ -78,10 +81,11 @@ class DrumMachine extends Component {
     updatePower() {
         this.setState({
             power: this.state.power ? false : true,
-            powerOn: this.state.power ? "Off" : "On"
+            powerOn: this.state.power ? "Off" : "On",
+            powerCol: this.state.power ? "#DC8976" : "#91a6d0"
         })
     }
-   
+
     render() {
         let newArr = this.state.currentBank.map((j, i, padArr) => {
             return (
@@ -100,28 +104,34 @@ class DrumMachine extends Component {
 
         return (
             <div className="container" id="drum-machine">
-                <h1>Drum Machine</h1>
-                <div>
-                    <p id="display">{this.state.display}</p>
-                    <div className="inline">
-                        <p >Volume: </p>
-                        <input type="range" min="1" max="100" value={this.state.volume} onChange={this.updateVolume}  />
-                        <p>{this.state.volume}</p>
+                <h1>React Drum Machine</h1>
+                <div class="outer">
+                    <div>
+                        <div id="display">
+                            <p >{this.state.display}</p>
+                        </div>
+                        <div className="inline">
+                            <p >Volume: </p>
+                            <input type="range" min="1" max="100" value={this.state.volume} onChange={this.updateVolume} />
+                            <p>{this.state.volume}</p>
+                        </div>
+                        <div className="inline">
+                            <p>Power: </p>
+                            <div onClick={this.updatePower} id="powerButton" style={{ backgroundColor: this.state.powerCol }}>
+                            </div>
+                            <p>{this.state.powerOn}</p>
+                        </div>
                     </div>
-                    <div className="inline">
-                        <p>Power: </p>
-                        <div onClick={this.updatePower} id="powerButton"></div>
-                        <p>{this.state.powerOn}</p>
+                    <div id="inner">
+                        {newArr}
                     </div>
-                </div>
-                <div id="inner">
-                    {newArr}
                 </div>
             </div>
-        )  
+        )
     }
 }
 
+//class for individual pads on the drum
 class DrumPad extends Component {
     constructor(props) {
         super(props)
@@ -134,19 +144,19 @@ class DrumPad extends Component {
     }
 
     handleKeyPress(e) {
-        if(e.keyCode === this.props.keyCode) {
+        if (e.keyCode === this.props.keyCode) {
             this.playAudio();
         }
     }
 
     playAudio() {
         const sound = document.getElementById(this.props.keyTrigger);
-        if(this.props.power) {
+        if (this.props.power) {
             let newVol = this.props.volume / 100;
             sound.volume = newVol;
             sound.play();
             this.props.updateDisplay(this.props.id)
-        }    
+        }
     }
 
     render() {

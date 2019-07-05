@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css?family=Francois+One");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f8f8fa;
+}
+body h1,
+body p {
+  color: #3764ab;
+}
+body #drum-machine {
+  border-radius: 5px;
+}
+body .container {
+  margin-top: 10rem;
+}
+body .container h1 {
+  margin: 3rem 0;
+  font-size: 3rem;
+}
+body .container #display {
+  height: 50px;
+  width: 200px;
+  margin: 3rem auto 3rem auto;
+  border: 1px solid black;
+  line-height: 3;
+  background-color: #3764ab;
+}
+body .container #display p {
+  color: #f8f8fa;
+}
+body .container .inline {
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+body .container #powerButton {
+  border: 1px solid black;
+  height: 30px;
+  width: 70px;
+  display: table-cell;
+  vertical-align: middle;
+  background-color: greenyellow;
+}
+body .container #inner {
+  border-radius: 5px;
+  margin: 2rem 1rem 1rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 400px));
+  grid-gap: 0.5rem;
+  justify-items: center;
+  justify-content: center;
+}
+body .container .drum-pad {
+  background-color: #91a6d0;
+  font-size: 45px;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+}
+body .container .drum-pad p {
+  color: #fae8eb;
+  line-height: 150px;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+@media only screen and (max-width: 640px) {
+  body .container {
+    margin-top: 1rem;
+  }
+  body .container h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  body .container #display {
+    margin: 0 auto 0 auto;
+  }
+  body .container #inner {
+    grid-gap: 0;
+  }
+  body .container #inner .drum-pad {
+    font-size: 25px;
+    font-size: 15px;
+  }
+  body .container #inner .drum-pad p {
+    line-height: 60px;
+  }
+}
+
+/*# sourceMappingURL=drum-machine.css.map */
